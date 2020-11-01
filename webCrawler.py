@@ -14,15 +14,16 @@ ini_url = "https://news.ycombinator.com/"
 # A queue of the unvisited urls
 url_q = deque([ini_url])
 
-# A set of visited urls
+# Sets of visited, unvisited and broken urls
 vis_url = set()
-unvis_url = set()
+child_url = set()
 broken_url = set()
 
 # Start BFS the queue
 while len(url_q) and len(vis_url) < 100:
     url = url_q.popleft()
     vis_url.add(url)
+    child_url = set()
     print("Processing url {}: {}".format(len(vis_url), url))
 
     # An try-except code block to catch all the broken urls
@@ -66,18 +67,18 @@ while len(url_q) and len(vis_url) < 100:
         if anchor.startswith('/'):
             # a url points to a file within the website
             new_url = base_url + anchor
-            unvis_url.add(new_url)
+            child_url.add(new_url)
         elif strip_domain in anchor:
             # if the anchor contains the url, then it is a local url
-            unvis_url.add(anchor)
+            child_url.add(anchor)
         elif not anchor.startswith('http'):
             # not a foreign link
             new_url = path + anchor
-            unvis_url.add(new_url)
+            child_url.add(new_url)
         else:
             # a foreign link
-            unvis_url.add(anchor)
-    for link in unvis_url:
+            child_url.add(anchor)
+    for link in child_url:
         # if we have not visited and added the link to the queue, then add the link to the queue
         if (link not in url_q) and (link not in vis_url):
             url_q.append(link)
