@@ -1,10 +1,10 @@
 # Web-Crawler-Basic
-A simple web crawler using HTML link tags, with Breadth First Search Implemented.
+A simple web crawler using HTML link tags, with Breadth-First Search Implemented.
 
 # Idea:
 Each website has various other websites linked to it and each one also links to some local or external websites. Visually speaking, it looks like a graph of **nodes** and **arcs**, where nodes represent the distinguish websites and arcs represent the link or relationship between two websites.
 
-We can use a `Breadth First Search(BFS)` to search through the graph. BFS means for each node, we will go through all its child nodes before reaching to the next level. Commonly, BFS is implemented by a queue and I have used a `deque` data structure in Python for implementation.
+We can use a `Breadth-First Search(BFS)` to search through the graph. BFS means for each node, we will go through all its child nodes before reaching the next level. Commonly, BFS is implemented by a queue and I have used a `deque` data structure in Python for implementation.
 
 
 # Step-by-step intro:
@@ -39,10 +39,10 @@ child_url = set()
 broken_url = set()
 ```
 
-Set up three sets to store urls in different status, we use set because we do not want to visit the same url twice:
+Set up three sets to store urls in different statuses, we use set because we do not want to visit the same url twice:
 * `vis_url`: the visited url set, once we have visited 100 urls, we will halt the program.
-* `child_url`: a temperary set stores the children of a particular url 
-* `broken_url`: the url which are broken and have been catched by the `request.exceptions` module.
+* `child_url`: a temporary set stores the children of a particular url 
+* `broken_url`: the url which is broken and has been caught by the `request.exceptions` module.
 
 ``` python
 # Start BFS the queue
@@ -53,7 +53,7 @@ while len(url_q) and len(vis_url) < 100:
     print("Processing url {}: {}".format(len(vis_url), url))
     ...
 ```
-We start doing the BFS operations on the queue by pop the front item of queue and add it into the visited set `vis_url`, this item is the url we are going to work on. In order to improve the efficiency of the codes, we will empty the `child_url` set evertime when we are operating on a new url.
+We start doing the BFS operations on the queue by pop the front item of the queue and add it into the visited set `vis_url`, this item is the url we are going to work on. In order to improve the efficiency of the codes, we will empty the `child_url` set whenever we are operating on a new url.
 
 ``` python
     ...
@@ -137,7 +137,7 @@ We iterate through all the children of the current url and form a fully qualifie
             url_q.append(link)
     ...
 ```
-For each link in the `child_url`, make sure none of them have been visited before and none of them are currently in the queue. This helps us to avoid having infinite loops in the program.
+For each link in the `child_url`, make sure none of them has been visited before and none of them is currently in the queue. This helps us to avoid having infinite loops in the program.
 
 ``` python
 print("Visited {} urls, Simple Web Crawler Job done!".format(len(vis_url)))
