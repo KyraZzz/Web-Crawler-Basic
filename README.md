@@ -2,9 +2,9 @@
 A simple web crawler using HTML link tags, with Breadth-First Search Implemented.
 
 # Idea:
-Each website has various other websites linked to it and each one also links to some local or external websites. Visually speaking, it looks like a graph of **nodes** and **arcs**, where nodes represent the distinguish websites and arcs represent the link or relationship between two websites.
+Each website has various other websites linked to it and each one also links to some local or external websites. Visually speaking, it looks like a graph of **nodes** and **arcs**, where nodes represent the websites and arcs represent the link or relationship between two websites.
 
-We can use a `Breadth-First Search(BFS)` to search through the graph. BFS means for each node, we will go through all its child nodes before reaching the next level. Commonly, BFS is implemented by a queue and I have used a `deque` data structure in Python for implementation.
+We can use a `Breadth-First Search(BFS)` to search through the graph. BFS means for each node, we will go through all its child nodes before reaching the next level. BFS is commonly implemented by a queue and I have used a `deque` data structure in Python for implementation.
 
 
 # Step-by-step intro:
@@ -53,7 +53,7 @@ while len(url_q) and len(vis_url) < 100:
     print("Processing url {}: {}".format(len(vis_url), url))
     ...
 ```
-We start doing the BFS operations on the queue by pop the front item of the queue and add it into the visited set `vis_url`, this item is the url we are going to work on. In order to improve the efficiency of the codes, we will empty the `child_url` set whenever we are operating on a new url.
+We start doing the BFS operations on the queue by popping the front item of the queue and adding it into the visited set `vis_url`, this item is the url we are going to work on. In order to improve the efficiency of the codes, we will empty the `child_url` set whenever we are operating on a new url.
 
 ``` python
     ...
